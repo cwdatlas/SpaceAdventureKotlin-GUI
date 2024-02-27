@@ -75,7 +75,7 @@ fun Info(buttonPressed: ButtonActions) {
                             }
                     ) {
                         Box {
-                            val bitmap = useResource("${it.name}.jpg") {
+                            val bitmap = useResource("${it.name}.jpg".lowercase()) {
                                 loadImageBitmap(it)
                             }
                             Image(
@@ -128,7 +128,7 @@ fun Info(buttonPressed: ButtonActions) {
                             }
                     ) {
                         Box {
-                            val bitmap = useResource("${it.name}.jpg") {
+                            val bitmap = useResource("${it.name}.jpg".lowercase()) {
                                 loadImageBitmap(it)
                             }
                             Image(
@@ -193,7 +193,7 @@ fun Info(buttonPressed: ButtonActions) {
                             }
                     ) {
                         Box {
-                            val bitmap = useResource("${it.name}.jpg") {
+                            val bitmap = useResource("${it.name}.jpg".lowercase()) {
                                 loadImageBitmap(it)
                             }
                             Image(
