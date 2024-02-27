@@ -15,7 +15,7 @@ import data.models.Rocket
 import utils.handCursor
 
 @Composable
-fun Title(infoPanel: (selectedButton: ButtonActions) -> Unit, rocket:Rocket, prevDeltaV:Int, numLaunches:Int) {
+fun Title(infoPanel: (selectedButton: ButtonActions) -> Unit, rocket:Rocket, prevDeltaV:Int) {
 
     Column(
         modifier = Modifier.fillMaxWidth(0.25f).fillMaxHeight().padding(12.dp),
@@ -56,11 +56,6 @@ fun Title(infoPanel: (selectedButton: ButtonActions) -> Unit, rocket:Rocket, pre
         )
         Text(
             "Engine Number: ${rocket.engineNumber}",
-            color = Color.Black,
-            fontWeight = FontWeight.Light
-        )
-        Text(
-            "Launch Attempts: $numLaunches",
             color = Color.Black,
             fontWeight = FontWeight.Light
         )

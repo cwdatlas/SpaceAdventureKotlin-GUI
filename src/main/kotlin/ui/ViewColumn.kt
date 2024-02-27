@@ -31,7 +31,6 @@ import utils.handCursor
 @Composable
 fun Info(buttonPressed: ButtonActions,
          rocketD: (rocket: Rocket) -> Unit,
-         numLaunchD: (numLaunches: Int) -> Unit,
          prevDeltaVD: (prevDeltaV: Int) -> Unit) {
     val rocket by remember{ mutableStateOf(AppState.rocket)}
     var numLaunches by remember{ mutableStateOf(0)}
@@ -49,13 +48,11 @@ fun Info(buttonPressed: ButtonActions,
         } else if (rocket.getDeltaV() < AppState.toOrbitDeltaV) {
             infoLog = "You need to achieve ${AppState.toOrbitDeltaV}, you had ${rocket.getDeltaV()}."
             prevDeltaVD(rocket.getDeltaV())
-            numLaunches++
-            numLaunchD(numLaunches)
+
         } else if (rocket.getDeltaV() >= AppState.toOrbitDeltaV){
             infoLog = "Good job! you made it to orbit with ${rocket.getDeltaV()} Delta V!! WOOHOO!"
             prevDeltaVD(rocket.getDeltaV())
-            numLaunches++
-            numLaunchD(numLaunches)
+
         }
 
         Column(
