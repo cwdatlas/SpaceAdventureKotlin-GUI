@@ -17,7 +17,8 @@ you must have git and java17 and up installed to run this program
 
 - in a new folder use 'git repo clone 'https://github.com/cwdatlas/SpaceAdventureKotlin-GUI' in your command line
 - Navigate into the newly created directory so you can see the 'gradlew' file.
-- Now type './gradlew run', then the application should boot right up!
+- Now type './gradlew run' or 'gradlew run', then it might take a while for the app to build.
+- The app should be booted within a couple of minutes! have fun!
 
 ---
 how to use
