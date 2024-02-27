@@ -3,7 +3,7 @@ SpaceAdventure Kotlin GUI Addition
 ---
 The kotlin GUI version of space adventure is a port of my python space adventure from https://github.com/cwdatlas/SpaceAdventure-GUI-.
 You are able to use a compose Desktop GUI to build a rocket and fly it, and if you have enough thrust and DeltaV, then you can get to space!
-This is my first ever Kotlin compose Desktop program, I followed this https://www.youtube.com/watch?v=7IOfsV6dTeg tutorial by YourSohail to learn how to use compose,
+This is my first ever Kotlin compose Desktop program, I followed this https://www.youtube.com/watch?v=7IOfsV6dTeg tutorial by YoursSohail to learn how to use compose,
 then I used what I learned to build the rest of the application.
 Vocab for the game!
 - DeltaV -> the change in velocity for your rocket, the more the better.
