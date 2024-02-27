@@ -1,8 +1,14 @@
-package data.models
+package data
+
+import data.models.Capsule
+import data.models.Engine
+import data.models.Tank
 
 /**
  * @author Aidan Scott
- * This class holds the information that will be needed statically across the app.
+ * InitParts holds the information that will be needed statically across the app.
+ * It initializes objects like capsules, tanks and engines.
+ * TODO: merge this file together with AppState, there is not need to have two static object holders for global reference.
  */
 object InitParts {
     // Init capsules

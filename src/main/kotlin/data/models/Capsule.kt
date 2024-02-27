@@ -1,5 +1,7 @@
 package data.models
+
 /**
+ * @author Aidan Scott
  * Base capsule class
  * @param name String: Name of the crew capsule
  * @param mass Int: mass of the craft in KG

@@ -7,7 +7,7 @@ import kotlin.math.pow
 /**
  * @author Aidan Scott
  *  * rocket is the class that manages all of the logic for thrust, ISP capsules and other parts of how a rocket works
- * @param name, optional name for your rocket
+ * @param name optional name for your rocket
  */
 class Rocket(var name: String = "My First Rocket") {
     // Init default values for capsule, tank, engine and engine number. This means nulls don't need to be used.

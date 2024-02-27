@@ -1,5 +1,7 @@
 package data.models
+
 /**
+ * @author Aidan Scott
  * Base Engine Class
  * @param name String: Name of the Engine
  * @param mass Int: Mass in kg

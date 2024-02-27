@@ -1,5 +1,7 @@
 package data.models
+
 /**
+ * @author Aidan Scott
  * Base models.Tank class
  * @param name String: name of the fuel tank
  * @param mass String: Mass in kg
