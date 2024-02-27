@@ -24,27 +24,38 @@ import androidx.compose.ui.unit.sp
 import data.models.AppState
 import data.models.ButtonActions
 import data.models.InitParts
+import data.models.Rocket
 import utils.handCursor
 
 
 @Composable
-fun Info(buttonPressed: ButtonActions) {
+fun Info(buttonPressed: ButtonActions,
+         rocketD: (rocket: Rocket) -> Unit,
+         numLaunchD: (numLaunches: Int) -> Unit,
+         prevDeltaVD: (prevDeltaV: Int) -> Unit) {
+    val rocket by remember{ mutableStateOf(AppState.rocket)}
+    var numLaunches by remember{ mutableStateOf(0)}
     var infoLog by remember { mutableStateOf("Unlaunched") }
 
     if (buttonPressed == ButtonActions.LAUNCH) {
-        if (AppState.rocket.capsule.name == "Unset") {
+        if (rocket.capsule.name == "Unset") {
             infoLog = "Please add a Capsule to your rocket then attempt a launch"
-        } else if (AppState.rocket.tank.name == "Unset") {
+        } else if (rocket.tank.name == "Unset") {
             infoLog = "Please add a Tank to your rocket then attempt a launch"
-        } else if (AppState.rocket.engine.name == "unset") {
+        } else if (rocket.engine.name == "unset") {
             infoLog = "Please add an Engine to your rocket then attempt a launch"
-        } else if (AppState.rocket.getTWR() < AppState.useableTWR) {
-            infoLog = "Your Thrust to weight ratio of ${AppState.rocket.getTWR()} must be more than 1.5 to launch"
-        } else if (AppState.rocket.getDeltaV() < AppState.toOrbitDeltaV) {
-            infoLog = "You need to achieve ${AppState.toOrbitDeltaV}, you had ${AppState.rocket.getDeltaV()}."
-        } else {
-            infoLog = "Good job! you made it to orbit with ${AppState.rocket.getDeltaV()} Delta V!! WOOHOO!"
-            AppState.previousDeltaV = AppState.rocket.getDeltaV()
+        } else if (rocket.getTWR() < AppState.useableTWR) {
+            infoLog = "Your Thrust to weight ratio of ${rocket.getTWR()} must be more than 1.5 to launch"
+        } else if (rocket.getDeltaV() < AppState.toOrbitDeltaV) {
+            infoLog = "You need to achieve ${AppState.toOrbitDeltaV}, you had ${rocket.getDeltaV()}."
+            prevDeltaVD(rocket.getDeltaV())
+            numLaunches++
+            numLaunchD(numLaunches)
+        } else if (rocket.getDeltaV() >= AppState.toOrbitDeltaV){
+            infoLog = "Good job! you made it to orbit with ${rocket.getDeltaV()} Delta V!! WOOHOO!"
+            prevDeltaVD(rocket.getDeltaV())
+            numLaunches++
+            numLaunchD(numLaunches)
         }
 
         Column(
@@ -71,7 +82,8 @@ fun Info(buttonPressed: ButtonActions) {
                     Card(
                         modifier = Modifier.width(400.dp).height(200.dp).padding(4.dp).pointerHoverIcon(handCursor())
                             .clickable {
-                                AppState.rocket.capsule = it
+                                rocket.capsule = it
+                                rocketD(rocket)
                             }
                     ) {
                         Box {
@@ -124,7 +136,8 @@ fun Info(buttonPressed: ButtonActions) {
                     Card(
                         modifier = Modifier.width(400.dp).height(200.dp).padding(4.dp).pointerHoverIcon(handCursor())
                             .clickable {
-                                AppState.rocket.tank = it
+                                rocket.tank = it
+                                rocketD(rocket)
                             }
                     ) {
                         Box {
@@ -184,11 +197,12 @@ fun Info(buttonPressed: ButtonActions) {
                         modifier = Modifier.width(400.dp).height(300.dp).padding(4.dp).pointerHoverIcon(handCursor())
                             .clickable {
                                 if (numEngines > 0) {
-                                    AppState.rocket.engine = it
-                                    AppState.rocket.engineNumber =
-                                        if (numEngines > AppState.rocket.getMaxEngines(it)) AppState.rocket.getMaxEngines(
+                                    rocket.engine = it
+                                    rocket.engineNumber =
+                                        if (numEngines > rocket.getMaxEngines(it)) rocket.getMaxEngines(
                                             it
                                         ) else numEngines
+                                    rocketD(rocket)
                                 }
                             }
                     ) {
@@ -233,10 +247,8 @@ fun Info(buttonPressed: ButtonActions) {
                                     fontWeight = FontWeight.Light
                                 )
                                 Text(
-                                    if (AppState.rocket.tank.name == "Unset") "Set Tank to add engine" else "$numEngines out of ${
-                                        AppState.rocket.getMaxEngines(
-                                            it
-                                        )
+                                    if (rocket.tank.name == "Unset") "Set Tank to add engine" else "$numEngines out of ${
+                                        rocket.getMaxEngines(it)
                                     }",
                                     color = Color.Black,
                                     fontWeight = FontWeight.Bold
@@ -244,13 +256,31 @@ fun Info(buttonPressed: ButtonActions) {
                                 Slider(
                                     value = numEngines.toFloat(),
                                     onValueChange = { numEngines = it.toInt() },
-                                    valueRange = 0f..AppState.rocket.getMaxEngines(it).toFloat()
+                                    valueRange = 0f..rocket.getMaxEngines(it).toFloat()
                                 )
                             }
                         }
                     }
                 }
             }
+        }
+    }else if (buttonPressed == ButtonActions.HELP){
+        Column(
+            modifier = Modifier.fillMaxSize().background(Color.White),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
+            Text(
+                "Welcome to Rocket Builder, your statistics will update when your attempt a launch!\n" +
+                        "---------------------Buttons---------------------\n" +
+                        "    capsule -> Lists capsules and their stats. Any choice will override a previous choice\n" +
+                        "    tank -> Lists tanks and their stats. Any choice will override a previous choice\n" +
+                        "    engine -> Lists engines and their stats. Any choice will override a previous choice\n" +
+                        "    launch -> Launches your rocket! See how far you get!\n" +
+                        "    Help -> Provides help for the user.\n",
+                color = Color.Black,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }

@@ -10,14 +10,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import data.models.AppState
 import data.models.ButtonActions
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import data.models.Rocket
 import utils.handCursor
 
 @Composable
-fun Title(infoPanel: (selectedButton: ButtonActions) -> Unit) {
+fun Title(infoPanel: (selectedButton: ButtonActions) -> Unit, rocket:Rocket, prevDeltaV:Int, numLaunches:Int) {
 
     Column(
         modifier = Modifier.fillMaxWidth(0.25f).fillMaxHeight().padding(12.dp),
@@ -47,27 +45,27 @@ fun Title(infoPanel: (selectedButton: ButtonActions) -> Unit) {
             fontWeight = FontWeight.Bold
         )
         Text(
-            if (AppState.rocket.getTWR().isNaN()) "TWR: 0" else "TWR: ${AppState.rocket.getTWR()}",
+            if (rocket.getTWR().isNaN()) "TWR: 0" else "TWR: ${rocket.getTWR()}",
             color = Color.Black,
             fontWeight = FontWeight.Light
         )
         Text(
-            "ISP: ${AppState.rocket.getISP()}",
+            "ISP: ${rocket.getISP()}",
             color = Color.Black,
             fontWeight = FontWeight.Light
         )
         Text(
-            "Engine Number: ${AppState.rocket.engineNumber}",
+            "Engine Number: ${rocket.engineNumber}",
             color = Color.Black,
             fontWeight = FontWeight.Light
         )
         Text(
-            "Launch Attempts: ${AppState.numberOfLaunches}",
+            "Launch Attempts: $numLaunches",
             color = Color.Black,
             fontWeight = FontWeight.Light
         )
         Text(
-            "Previous DeltaV: ${AppState.previousDeltaV}",
+            "Previous DeltaV: $prevDeltaV",
             color = Color.Black,
             fontWeight = FontWeight.Light
         )
