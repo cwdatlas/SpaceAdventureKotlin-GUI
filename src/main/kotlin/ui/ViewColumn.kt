@@ -319,7 +319,8 @@ fun ViewColumn(buttonPressed: ButtonActions,
                         "    tank -> Lists tanks and their stats. Any choice will override a previous choice\n" +
                         "    engine -> Lists engines and their stats. Any choice will override a previous choice\n" +
                         "    launch -> Launches your rocket! See how far you get!\n" +
-                        "    Help -> Provides help for the user.\n",
+                        "    Help -> Provides help for the user.\n"+
+                        "    Exit program using the x in the top right corner\n",
                 color = Color.Black,
                 fontWeight = FontWeight.Bold
             )

@@ -28,3 +28,4 @@ Here is a list of Buttons and their uses for the game:
 - tank    -> Lists tanks and their stats. Any choice will override a previous choice
 - engine  -> Lists engines and their stats. Any choice will override a previous choice
 - launch  -> Launches your rocket! See how far you get!
+- Exit program using the x in the top right corner
